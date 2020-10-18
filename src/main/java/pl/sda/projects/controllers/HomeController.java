@@ -1,11 +1,9 @@
 package pl.sda.projects.controllers;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.sda.projects.model.User;
 import pl.sda.projects.services.SecurityService;
 import pl.sda.projects.services.UserService;
 
@@ -40,6 +38,11 @@ public class HomeController {
         model.addAttribute("email", user.getEmail());
 
         return "profile";
+    }
+
+    @GetMapping("/changePassword")
+    public String getPassword(Model model, @RequestParam(defaultValue = "false") boolean error){
+            return "changePassword";
     }
 
 

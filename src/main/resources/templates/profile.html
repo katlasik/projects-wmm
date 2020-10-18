@@ -16,7 +16,7 @@
                 <label th:text="${name}"></label><br>
                 <label th:text="#{profile.login.email}"></label>
                 <label th:text="${email}"></label><br><br>
-                <button type="button" class="btn btn-primary btn-sm" th:text="#{change.password}" ></button>
+                <a type="button" class="btn btn-primary btn-sm" th:href="@{/changePassword}" th:text="#{change.password}" ></a>
             </p>
         </div>
 
