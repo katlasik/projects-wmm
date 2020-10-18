@@ -6,6 +6,8 @@ import pl.sda.projects.model.Role;
 import pl.sda.projects.model.User;
 import pl.sda.projects.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -35,6 +37,10 @@ public class UserService {
 
         );
         userRepository.save(user);
+    }
+
+    public Optional<User> getUserByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 }
 
