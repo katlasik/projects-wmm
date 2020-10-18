@@ -35,11 +35,9 @@ public class HomeController {
     }
     @GetMapping("/profile")
     public String getProfile(Model model) {
-        var email = SecurityContextHolder.getContext().getAuthentication().getName();
-        String user = userService.getUserByEmail(email).map(u -> u.getName()).orElse("");
-
-        model.addAttribute("name", user);
-        model.addAttribute("email", email);
+        var user = securityService.getLoggedInUser().orElseThrow();
+        model.addAttribute("name", user.getName());
+        model.addAttribute("email", user.getEmail());
 
         return "profile";
     }
