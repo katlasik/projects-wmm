@@ -27,10 +27,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HomeControllerTest {
 
-    @MockBean
-
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    UserRepository userRepository;
 
     @Test
     @DisplayName("Anonymous users should be able to see login screen")
@@ -72,10 +73,6 @@ class HomeControllerTest {
                 .andExpect(redirectedUrl("/"));
 
     }
-
-
-    @MockBean
-    UserRepository userRepository;
 
     @Test
     @DisplayName("User should be found by e-mail to display their data on profile page")
