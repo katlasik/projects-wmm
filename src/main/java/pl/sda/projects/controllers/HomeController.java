@@ -1,17 +1,21 @@
 package pl.sda.projects.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.sda.projects.model.User;
 import pl.sda.projects.services.SecurityService;
+import pl.sda.projects.services.UserService;
 
 @Controller
 public class HomeController {
-
+    private final UserService userService;
     private final SecurityService securityService;
 
-    public HomeController(SecurityService securityService) {
+    public HomeController(SecurityService securityService, UserService userService) {
+        this.userService = userService;
         this.securityService = securityService;
     }
 
@@ -29,5 +33,16 @@ public class HomeController {
 			return "login";
 		}
     }
+    @GetMapping("/profile")
+    public String getProfile(Model model) {
+        var user = securityService.getLoggedInUser().orElseThrow();
+        model.addAttribute("name", user.getName());
+        model.addAttribute("email", user.getEmail());
+
+        return "profile";
+    }
+
+
+
 
 }

@@ -2,12 +2,19 @@ package pl.sda.projects.controllers;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.sda.projects.model.Role;
+import pl.sda.projects.model.User;
+import pl.sda.projects.repository.UserRepository;
+
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -22,6 +29,9 @@ class HomeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    UserRepository userRepository;
 
     @Test
     @DisplayName("Anonymous users should be able to see login screen")
@@ -62,5 +72,18 @@ class HomeControllerTest {
         mockMvc.perform(get("/logout"))
                 .andExpect(redirectedUrl("/"));
 
+    }
+
+    @Test
+    @DisplayName("User should be found by e-mail to display their data on profile page")
+    @WithMockUser(username = "name@gmail.com", password = "pass123")
+    void viewProfile() throws Exception {
+
+        User user = new pl.sda.projects.model.User(2L, "name@gmail.com", "pass123", "Username", true, Role.USER);
+
+        Mockito.when(userRepository.findByEmail("name@gmail.com")).thenReturn(Optional.of(user));
+        mockMvc.perform(get("/profile")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("Username")))
+                .andExpect(content().string(containsString("name@gmail.com")));
     }
 }
