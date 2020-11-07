@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head.html :: head(title='welcome.title')"></head>
+<body>
+<head th:replace="fragments/header.html :: header"></head>
+<main role="main">
+
+
+
+    <div class="container-fluid d-flex h-100 p-3 mx-auto flex-column justify-content-center">
+        <form id="registration" method="post" action="/registration">
+            <h2 th:text="#{registration.register}"></h2>
+            <p>
+                <label for="username" class="sr-only"><h2 th:text="#{registration.email}"></h2></label>
+                <input type="text" id="username" name="username" class="form-control" th:placeholder="#{registration.register}"
+                       required
+                       autofocus>
+            </p>
+            <p>
+                <label for="password" class="sr-only"><h2 th:text="#{registration.password}"></h2></label>
+                <input type="password" id="password" name="password" class="form-control"
+                       th:placeholder="#{registration.password}" required>
+            </p>
+            <p>
+                <label for="passwordConfirmation" class="sr-only"><h2 th:text="#{registration.passwordConfirmation}"></h2></label>
+                <input type="password" id="passwordConfirmation" name="passwordConfirmation" class="form-control"
+                       th:placeholder="#{registration.passwordConfirmation}" required>
+            </p>
+            <p>
+                <label for="emailAdress" class="sr-only"><h2 th:text="#{registration.email}"></h2></label>
+                <input type="emailAdress" id="emailAdress" name="emailAdress" class="form-control"
+                       th:placeholder="#{login.passwordConfirmation}" required>
+            </p>
+            <p>
+                <label for="male" class="sr-only"><h2 th:text="#{registration.male}"></h2></label>
+                <input type="male" id="male" name="male" class="form-control"
+                       th:placeholder="#{login.passwordConfirmation}" required>
+            </p>
+            <p>
+                <label for="birghday" class="sr-only"><h2 th:text="#{registration.birghday}"></h2></label>
+                <input type="birghday" id="birghday" name="birghday" class="form-control"
+                       th:placeholder="#{login.passwordConfirmation}" required>
+            </p>
+            <input
+                    type="hidden"
+                    th:name="${_csrf.parameterName}"
+                    th:value="${_csrf.token}"/>
+            <div th:text="#{login.wrongCredentials}" th:if="${error}" class="alert alert-danger" role="alert"></div>
+            <button class="btn btn-lg btn-primary btn-block" th:text="#{login.login}" type="submit"></button>
+        </form>
+    </div>
+
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>
