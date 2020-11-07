@@ -42,5 +42,18 @@ public class UserService {
     public Optional<User> getUserByEmail(String email){
         return userRepository.findByEmail(email);
     }
+    public boolean changePassword(String email, String currentPassword, String newPassword) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalStateException("User with " + email + " doesn't exist."));
+        if (passwordEncoder.matches(currentPassword, user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }
 
