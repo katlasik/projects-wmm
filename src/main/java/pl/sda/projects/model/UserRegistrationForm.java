@@ -1,13 +1,36 @@
 package pl.sda.projects.model;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class UserRegistrationForm {
 
+        @Size(min = 3, max = 20, message = "{registration.errorMsg.name}")
+        @NotEmpty
+        @NotNull
+        @Column(unique = true)
         private String username;
+
+        @Size(min = 6, max = 100, message = "{registration.errorMsg.password}")
+        @NotEmpty
+        @NotNull
         private String password;
+
+        @Size(min = 6, max = 100, message = "{registration.errorMsg.password}")
+        @NotEmpty
+        @NotNull
         private String passwordConfirmation;
+
+        @Email(regexp = ".+@.+\\..+", message = "{registration.errorMsg.email}")
+        @NotEmpty
+        @NotNull
+        @Column(unique = true)
         private String emailAdress;
+
         private String male;
         private String birghday;
 
