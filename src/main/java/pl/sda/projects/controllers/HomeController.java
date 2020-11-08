@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.sda.projects.model.forms.ChangePasswordForm;
-import pl.sda.projects.model.Role;
-import pl.sda.projects.model.UserRegistration;
 import pl.sda.projects.services.SecurityService;
 import pl.sda.projects.services.UserService;
 
-import javax.validation.Valid;
-import pl.sda.projects.services.UserService;
 import javax.validation.Valid;
 
 @Controller

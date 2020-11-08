@@ -81,7 +81,7 @@ class HomeControllerTest {
     @WithMockUser(username = "name@gmail.com", password = "pass123")
     void viewProfile() throws Exception {
 
-        User user = new pl.sda.projects.model.User(2L, "name@gmail.com", "pass123", "Username", true, Role.USER);
+        User user = new pl.sda.projects.model.User(2L,"Username" , "name@gmail.com", "pass123" , true, Role.USER);
 
         when(userService.getUserByEmail("name@gmail.com")).thenReturn(Optional.of(user));
         mockMvc.perform(get("/profile")).andDo(print()).andExpect(status().isOk())

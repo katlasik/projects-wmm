@@ -4,42 +4,50 @@
 <body>
 <head th:replace="fragments/header.html :: header"></head>
 <main role="main">
-
-
-
     <div class="container-fluid d-flex h-100 p-3 mx-auto flex-column justify-content-center">
-        <form id="registration" method="post" action="/registration">
+        <form th:object="${registration}" id="registration" method="post" action="/registration">
             <h2 th:text="#{registration.register}"></h2>
+
+            <div class="alert alert-warning" th:each="error: ${#fields.errors('username')}" th:text="${error}"></div>
+
+
+
             <p>
-                <label for="username" class="sr-only"><h2 th:text="#{registration.email}"></h2></label>
-                <input type="text" id="username" name="username" class="form-control" th:placeholder="#{registration.register}"
+                <label for="username" class="sr-only"><h2 th:text="#{registration.username}"></h2></label>
+                <input type="text" id="username" name="username" class="form-control" th:placeholder="#{registration.username}"
                        required
                        autofocus>
             </p>
+
+            <div class="alert alert-warning" th:each="error: ${#fields.errors('password')}" th:text="${error}"></div>
             <p>
                 <label for="password" class="sr-only"><h2 th:text="#{registration.password}"></h2></label>
                 <input type="password" id="password" name="password" class="form-control"
                        th:placeholder="#{registration.password}" required>
             </p>
+
+
             <p>
                 <label for="passwordConfirmation" class="sr-only"><h2 th:text="#{registration.passwordConfirmation}"></h2></label>
                 <input type="password" id="passwordConfirmation" name="passwordConfirmation" class="form-control"
                        th:placeholder="#{registration.passwordConfirmation}" required>
             </p>
+
+            <div class="alert alert-warning" th:each="error: ${#fields.errors('emailAdress')}" th:text="${error}"></div>
             <p>
                 <label for="emailAdress" class="sr-only"><h2 th:text="#{registration.email}"></h2></label>
                 <input type="emailAdress" id="emailAdress" name="emailAdress" class="form-control"
-                       th:placeholder="#{login.passwordConfirmation}" required>
+                       th:placeholder="#{registration.email}" required>
             </p>
             <p>
                 <label for="male" class="sr-only"><h2 th:text="#{registration.male}"></h2></label>
                 <input type="male" id="male" name="male" class="form-control"
-                       th:placeholder="#{login.passwordConfirmation}" required>
+                       th:placeholder="#{registration.male}" required>
             </p>
             <p>
                 <label for="birghday" class="sr-only"><h2 th:text="#{registration.birghday}"></h2></label>
                 <input type="birghday" id="birghday" name="birghday" class="form-control"
-                       th:placeholder="#{login.passwordConfirmation}" required>
+                       th:placeholder="#{registration.birghday}" required>
             </p>
             <input
                     type="hidden"

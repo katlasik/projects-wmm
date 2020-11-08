@@ -2,7 +2,7 @@ package pl.sda.projects.model;
 
 import java.util.Objects;
 
-public class UserRegistration {
+public class UserRegistrationForm {
 
         private String username;
         private String password;
@@ -63,7 +63,7 @@ public class UserRegistration {
         public boolean equals(Object o) {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
-                UserRegistration that = (UserRegistration) o;
+                UserRegistrationForm that = (UserRegistrationForm) o;
                 return Objects.equals(username, that.username) &&
                         Objects.equals(password, that.password) &&
                         Objects.equals(passwordConfirmation, that.passwordConfirmation) &&
