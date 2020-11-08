@@ -8,6 +8,8 @@ import pl.sda.projects.model.Role;
 import pl.sda.projects.model.User;
 import pl.sda.projects.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -41,5 +43,22 @@ public class UserService {
         //logger.info("User was created. User = {}", user);
         userRepository.save(user);
     }
+
+    public Optional<User> getUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+    public boolean changePassword(String email, String currentPassword, String newPassword) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalStateException("User with " + email + " doesn't exist."));
+        if (passwordEncoder.matches(currentPassword, user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }
 
