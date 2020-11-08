@@ -1,5 +1,7 @@
 package pl.sda.projects.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.projects.model.Role;
@@ -34,6 +36,9 @@ public class UserService {
                 role
 
         );
+
+
+        //logger.info("User was created. User = {}", user);
         userRepository.save(user);
     }
 }

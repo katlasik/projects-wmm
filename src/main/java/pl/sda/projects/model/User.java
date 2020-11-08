@@ -33,10 +33,6 @@ public class User {
     @NotNull
     private String password;
 
-    @Size(min = 6, max = 100, message = "{registration.errorMsg.password}")
-    @NotEmpty
-    @NotNull
-    private String rePassword;
 
 
 
@@ -48,12 +44,11 @@ public class User {
 
     protected User() {}
 
-    public User(Long id, @Size(min = 3, max = 20, message = "{registration.errorMsg.name}") @NotEmpty @NotNull String name, @Email(regexp = ".+@.+\\..+", message = "{registration.errorMsg.email}") @NotEmpty @NotNull String email, @Size(min = 6, max = 100, message = "{registration.errorMsg.password}") @NotEmpty @NotNull String password, @Size(min = 6, max = 100, message = "{registration.errorMsg.password}") @NotEmpty @NotNull String rePassword, boolean active, @NotNull Role role) {
+    public User(Long id, @Size(min = 3, max = 20, message = "{registration.errorMsg.name}") @NotEmpty @NotNull String name, @Email(regexp = ".+@.+\\..+", message = "{registration.errorMsg.email}") @NotEmpty @NotNull String email, @Size(min = 6, max = 100, message = "{registration.errorMsg.password}") @NotEmpty @NotNull String password , boolean active, @NotNull Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.rePassword = rePassword;
         this.active = active;
         this.role = role;
     }
@@ -90,13 +85,6 @@ public class User {
         this.password = password;
     }
 
-    public String getRePassword() {
-        return rePassword;
-    }
-
-    public void setRePassword(String rePassword) {
-        this.rePassword = rePassword;
-    }
 
     public boolean isActive() {
         return active;
@@ -121,7 +109,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rePassword='" + rePassword + '\'' +
+
                 ", active=" + active +
                 ", role=" + role +
                 '}';
@@ -137,12 +125,11 @@ public class User {
                 Objects.equals(name, user.name) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
-                Objects.equals(rePassword, user.rePassword) &&
                 role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, rePassword, active, role);
+        return Objects.hash(id, name, email, password, active, role);
     }
 }
